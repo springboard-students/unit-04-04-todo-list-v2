@@ -1,12 +1,20 @@
 'use strict';
 
-export class Utils {
-  static clog(fore, back, ...args) {
-    let msg = '';
-    args.forEach( arg => msg += arg + ' ' );
-    console.log( '%c ' + msg , 'background: ' + back +'; color: ' + fore );
-  }
+import {konz} from '../utils/constants.js';
 
+export class Utils {
+  static clog(bypass, fore, back, ...args) {
+    if ( !konz.debugMode ){
+      return;
+    }
+    if ( bypass ){
+      console.log( args );
+      return;
+    }
+    let msg = '';
+    args.forEach(arg => msg += arg + ' ');
+    console.log('%c ' + msg, 'background: ' + back + '; color: ' + fore);
+  }
 
   static terminalColor(f, b) {
     const pre = '\e[';

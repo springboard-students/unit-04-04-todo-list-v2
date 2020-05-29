@@ -33,6 +33,9 @@
     resize: none;
 }
 
+.text:focus {
+    background-color: lightblue;
+}
 .is-editing{
     background-color: yellowgreen;
 }
@@ -79,4 +82,13 @@
   border: 1px solid gray;
 }
 
-
+.bordered {
+    /*border: 2px solid red;*/
+    width: 113px;
+    height: 76px;
+    position: relative;
+    top: 0px;
+    display: inline-block;
+    /*border: none;*/
+    resize: none;
+}
