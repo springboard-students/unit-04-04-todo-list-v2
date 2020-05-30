@@ -1,14 +1,26 @@
 'use strict';
 
-import {konz}       from '../utils/constants.js';
-import {Observable} from '../patterns/observable.js';
+import {Observable} from '../../patterns/observable.js';
+import {konz}       from '../../utils/constants.js';
 
-export class Edition extends Observable {
-  constructor() {
+export class Edition
+    extends Observable {
+  constructor(domElem) {
     super(konz.names.edition);
+    this.domElem = domElem;
+    this.domElem.addEventListener('change', e => {
+      console.log('changed: notify storage');
+    });
+    this.domElem.addEventListener('click', e => {
+      console.log('clicked: notify item!!!');
+    });
   }
 
-  getEditionElem(value){
+  getDomElem() {
+    return this.domElem;
+  }
+
+  getEditionElem(value) {
     // const textContainer = document.createElement('div');
     const text = document.createElement('textarea');
     text.classList.add('text');

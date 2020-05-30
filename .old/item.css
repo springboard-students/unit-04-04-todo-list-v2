@@ -3,16 +3,17 @@
     Author     : acampos
 */
 .item {
-  display: inline-block;
-  width: 150px;
-  height: 82px;
-  background-color: whitesmoke;
-  cursor: pointer;
-  margin: 5px;
+  display          : inline-block;
+  width            : 150px;
+  height           : 82px;
+  background-color : whitesmoke;
+  cursor           : pointer;
+  margin           : 5px;
+  position         : relative;
 }
 
-.clicked{
-    box-shadow: 5px 5px 5px orange;
+.clicked {
+  box-shadow : 5px 5px 5px orange;
 }
 
 /*.item .bar {
@@ -22,73 +23,108 @@
   float: right;
 }*/
 
-
 .item .text {
-    width: 113px;
-    height: 76px;
-    position: relative;
-    top: 0px;
-    display: inline-block;
-    border: none;
-    resize: none;
+  width    : 113px;
+  height   : 76px;
+  position : absolute;
+  top      : 0;
+  display  : inline-block;
+  border   : none;
+  resize   : none;
 }
 
 .text:focus {
-    background-color: lightblue;
-}
-.is-editing{
-    background-color: yellowgreen;
+  background-color : lightblue;
 }
 
-.item .options{
-  width: 30px;
-  height: 82px;
-  background-color: rgba( 255, 165, 0, 0.2 );
-  float: right;
+.is-editing {
+  background-color : yellowgreen;
+}
+
+.item .options {
+  width            : 30px;
+  height           : 82px;
+  background-color : rgba(255, 165, 0, 0.2);
+  float            : right;
   /*visibility: hidden;*/
   /*width: 0;*/
-  text-align: center;
+  text-align       : center;
 }
 
 .item .options .option {
   /*background: cyan;*/
-  height: 41px;
-  display: block;
+  height  : 41px;
+  display : block;
 }
 
-.item .options .option .option-content{
-  /*clear: both;*/
-  margin: 0;
-  position: relative;
-  display: block;
-  top: 50%;
-  left: 50%;
-  transform: translate(-50%, -50%);
+/**
+new
+ */
+.item .option {
+  /*background: cyan;*/
+  height     : 41px;
+  width      : 30px;
+  display    : block;
+  position   : absolute;
+  /*border: 1px solid blue;*/
+  transition : 0.25s;
+}
+
+/**
+new
+ */
+.item .option-content {
+  margin     : 0;
+  position   : relative;
+  display    : block;
+  top        : 50%;
+  left       : 50%;
+  transform  : translate(-50%, -50%);
+  text-align : center;
   /*border: 1px solid red;*/
 }
 
-.item .options .done{
-  /*display: block;*/
-  color: lightseagreen;
-  /*border: 1px solid cyan;*/
+/**
+new
+ */
+.item .option:hover {
+  opacity : 0.8;
 }
-.item .options .remove{
+
+/**
+new
+ */
+.item .done {
+  color   : green;
+  /*border: 1px solid cyan;*/
+  opacity : 0.4;
+  top     : 0;
+  right   : 0;
+}
+
+/**
+
+ */
+.item .remove {
   /*display: block;*/
-  color: coral;
+  /*color: coral;*/
+  right   : 0;
+  bottom  : 0;
+  opacity : 0.3;
   /*border: 1px solid cyan;*/
 }
 
 .item .options .option:hover {
-  border: 1px solid gray;
+  /*border: 1px solid gray;*/
 }
 
 .bordered {
-    /*border: 2px solid red;*/
-    width: 113px;
-    height: 76px;
-    position: relative;
-    top: 0px;
-    display: inline-block;
-    /*border: none;*/
-    resize: none;
+  /*border: 2px solid red;*/
+  width    : 113px;
+  height   : 76px;
+  position : relative;
+  top      : 0px;
+  display  : inline-block;
+  /*border: none;*/
+  resize   : none;
 }

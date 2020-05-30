@@ -1,9 +1,10 @@
 'use strict';
 
-import {Observable} from '../patterns/observable.js';
-import {konz}       from '../utils/constants.js';
-import {Utils}      from '../utils/utils.js';
-import {Item}       from '../view.objects/item.js';
+import {ItemFactory} from '../patterns/item-factory.js';
+import {Observable}  from '../patterns/observable.js';
+import {konz}        from '../utils/constants.js';
+import {Utils}       from '../utils/utils.js';
+import {List}        from '../view.objects/list.js';
 
 export class View
     extends Observable {
@@ -43,15 +44,21 @@ export class View
       value: '',
     };
     data.forEach(name => {
-      item.value = name;
-      Utils.clog(false, 'magenta', '', 'View/addLoadedItems/adding item', name);
-      konz.elems.list.append(Item.getItemElem(item));
+      // item.value = name;
+      // Utils.clog(false, 'magenta', '', 'View/addLoadedItems/adding item', name);
+      // konz.elems.list.append(List.createItemElem(item));
     });
+    const new_item = new ItemFactory({
+                                       edition: {value: 'Indo longe...'},
+                                       completion: {},
+                                       removal: {},
+                                     }).build();
+    konz.elems.list.append(new_item.getDomElem());
     // konz.elems.list.querySelectorAll('.text').forEach(text => {
     //   text.addEventListener( 'click', e => {
     //     console.log( e.target );
     //   });
     // });
-      Utils.clog(false, 'magenta', '', 'View/addLoadedItems/completed');
+    Utils.clog(false, 'magenta', '', 'View/addLoadedItems/completed');
   }
 }

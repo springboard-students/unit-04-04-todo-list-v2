@@ -34,7 +34,6 @@ class Init
     this.storage.addObserver(this.view);
     this.list.addObserver(this.storage);
     this.list.addObserver(this.view);
-    // this.view.addObserver(this.add);
     this.add.addObserver(this.list);
   }
 }

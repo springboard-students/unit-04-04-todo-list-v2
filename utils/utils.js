@@ -13,7 +13,12 @@ export class Utils {
     }
     let msg = '';
     args.forEach(arg => msg += arg + ' ');
-    console.log('%c ' + msg, 'background: ' + back + '; color: ' + fore);
+    console.log('%c ' + String(new Date().getTime()) + ' » ' + msg, 'background: ' + back + '; color: ' + fore);
+    Utils.sleep(100);
+  }
+
+  sleep(ms) {
+    return new Promise(resolve => setTimeout(resolve, ms));
   }
 
   static terminalColor(f, b) {
@@ -52,4 +57,13 @@ export class Utils {
     }
     return color;
   }
+
+  static sleep(milliseconds) {
+    const date = Date.now();
+    let currentDate = null;
+    do {
+      currentDate = Date.now();
+    } while (currentDate - date < milliseconds);
+  }
+
 }
