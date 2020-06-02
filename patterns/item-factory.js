@@ -94,4 +94,3 @@ class RemovalFactory {
     return new Removal(remove);
   }
 }
-

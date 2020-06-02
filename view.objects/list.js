@@ -1,8 +1,9 @@
 'use strict';
 
-import {Edition} from '../view.objects/item/edition.js';
-import {konz}    from '../utils/constants.js';
 import {Observable} from '../patterns/observable.js';
+import {konz}       from '../utils/constants.js';
+import {Utils}      from '../utils/utils.js';
+import {Edition}    from '../view.objects/item/edition.js';
 
 export class List
     extends Observable {
@@ -11,13 +12,23 @@ export class List
     super(konz.names.list);
   }
 
-  update( data ){
-    switch ( data.origin ){
+  update(data) {
+    switch (data.origin) {
       case konz.names.add: {
         this.data.occurrence = data.occurrence;
-        this.data.payload = data.payload;
-        this.notify( this.data );
+        this.data.payload    = data.payload;
+        this.notify(this.data);
+        break;
       }
+      case konz.names.item:
+        if (this.data.occurrence === konz.occurrences.removal) {
+          Utils.clog('lightblue', null, 'List/removal/data:');
+          Utils.clog(true, null, null, data);
+          Utils.clog('lightblue', null, 'List/adding observable Item');
+          data.payload[0].addObserver(this);
+          this.notify(data);
+          break;
+        }
     }
   }
 
@@ -57,7 +68,7 @@ export class List
     item.appendChild(options);
     //
     item.addEventListener('click', e => {
-      console.log('item clicked', e );
+      console.log('item clicked', e);
     });
     //
     return item;

@@ -8,7 +8,7 @@ export class Item
     extends Observable {
   constructor() {
     super(konz.names.item);
-    // this.addObserver(konz.)
+    // this.addObserver(...);
     // this.domElem = domElem;
     // this.initEdition( edition );
     // this.completion = completion;
@@ -26,8 +26,13 @@ export class Item
   update(data) {
       switch( data.origin ){
         case konz.names.removal: {
-          Utils.clog(false, 'cyan', '', 'Item/notified by Removal with this data:');
+          Utils.clog(false, 'cyan', '', 'Item/'+ this.getDomElem().id +'/notified by Removal with this' +
+                                        ' data:');
           Utils.clog( true, null, null, data );
+          Utils.clog(false, 'cyan', '', 'Item/updating the payload and notifying observers');
+          data.payload = [this];
+          this.notify( data );
+          break;
         }
       }
   }

@@ -35,6 +35,13 @@ export class View
           break;
         }
       }
+        if (this.data.occurrence === konz.occurrences.removal) {
+          Utils.clog(false, 'magenta', '', 'View/removal:', payload.getDomElem());
+          this.data.payload[0].getDomElem().remove();
+          this.notify(data);
+          break;
+        }
+
     }
   }
 
