@@ -4,21 +4,18 @@ import {konz} from '../utils/constants.js';
 
 export class Utils {
   static clog(bypass, fore, back, ...args) {
-    if ( !konz.debugMode ){
+    if (!konz.debugMode) {
       return;
     }
-    if ( bypass ){
-      console.log( args );
+    if (bypass) {
+      console.log(args);
       return;
     }
     let msg = '';
     args.forEach(arg => msg += arg + ' ');
-    console.log('%c ' + String(new Date().getTime()) + ' » ' + msg, 'background: ' + back + '; color: ' + fore);
-    Utils.sleep(100);
-  }
-
-  sleep(ms) {
-    return new Promise(resolve => setTimeout(resolve, ms));
+    console.log('%c ' + String(new Date().getTime()) + ' » ' + msg,
+                'background: ' + back + '; color: ' + fore);
+    // Utils.sleep(1000);
   }
 
   static terminalColor(f, b) {
@@ -58,12 +55,16 @@ export class Utils {
     return color;
   }
 
+  // Source of the sleep() function: https://www.sitepoint.com/delay-sleep-pause-wait/
+  // It's used only for debugging purposes.
+  //
   static sleep(milliseconds) {
-    const date = Date.now();
+    const date      = Date.now();
     let currentDate = null;
     do {
       currentDate = Date.now();
     } while (currentDate - date < milliseconds);
   }
+
 
 }

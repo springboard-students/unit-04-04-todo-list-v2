@@ -12,7 +12,11 @@ export class Edition
       console.log('changed: notify storage');
     });
     this.domElem.addEventListener('click', e => {
-      console.log('clicked: notify item!!!');
+      console.log('edition clicked: notify item!!!', 'Value:', this.getDomElem().value);
+      // This will trigger the change event, if anything changes...
+      this.getDomElem().blur();
+      // ... and then keep the focus in the current element.
+      this.getDomElem().focus();
     });
   }
 

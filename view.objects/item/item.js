@@ -8,7 +8,7 @@ export class Item
     extends Observable {
   constructor() {
     super(konz.names.item);
-    this.addObserver(konz.)
+    // this.addObserver(konz.)
     // this.domElem = domElem;
     // this.initEdition( edition );
     // this.completion = completion;

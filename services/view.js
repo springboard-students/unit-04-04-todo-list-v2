@@ -48,8 +48,14 @@ export class View
       // Utils.clog(false, 'magenta', '', 'View/addLoadedItems/adding item', name);
       // konz.elems.list.append(List.createItemElem(item));
     });
-    const new_item = new ItemFactory({
+    let new_item = new ItemFactory({
                                        edition: {value: 'Indo longe...'},
+                                       completion: {},
+                                       removal: {},
+                                     }).build();
+    konz.elems.list.append(new_item.getDomElem());
+    new_item = new ItemFactory({
+                                       edition: {value: 'Indo ainda mais longe...'},
                                        completion: {},
                                        removal: {},
                                      }).build();
