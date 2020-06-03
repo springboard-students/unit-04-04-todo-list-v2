@@ -15,8 +15,8 @@ class Init
     super(konz.names.init);
     Utils.clog(false, 'yellow', '', 'Init/creating view objects');
     this.storage = new Storage();
-    this.view    = new View();
     this.list    = new List();
+    this.view    = new View(this.list); // his is a workaround to make the list to observe item
     this.add     = new Add();
     //
     this.init();

@@ -30,8 +30,9 @@ export class Item
                                         ' data:');
           Utils.clog( true, null, null, data );
           Utils.clog(false, 'cyan', '', 'Item/updating the payload and notifying observers');
-          data.payload = [this];
-          this.notify( data );
+          this.data.occurrence = data.occurrence;
+          this.data.payload = [this.getDomElem().id];
+          this.notify( this.data );
           break;
         }
       }

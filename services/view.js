@@ -4,27 +4,27 @@ import {ItemFactory} from '../patterns/item-factory.js';
 import {Observable}  from '../patterns/observable.js';
 import {konz}        from '../utils/constants.js';
 import {Utils}       from '../utils/utils.js';
-import {List}        from '../view.objects/list.js';
 
 export class View
     extends Observable {
 
-  constructor() {
+  constructor(list) {
     super(konz.names.view);
+    this.list = list;
   }
 
   update(data) {
-    const origin     = data.origin;
-    const occurrence = data.occurrence;
-    const payload    = data.payload;
+    const origin         = data.origin;
+    this.data.occurrence = data.occurrence;
+    const payload        = data.payload;
     switch (origin) {
       case konz.names.init: {
-        Utils.clog(false, 'magenta', '', 'View/update/Occurrence from init:', occurrence);
+        Utils.clog(false, 'magenta', '', 'View/update/Occurrence from init:', this.data.occurrence);
         break;
       }
       case konz.names.storage: {
-        Utils.clog(false, 'magenta', '', 'View/update/Occurrence from storage:', occurrence);
-        if (occurrence === konz.occurrences.itemsLoadedFromStorage) {
+        Utils.clog(false, 'magenta', '', 'View/update/Occurrence from storage:', this.data.occurrence);
+        if (this.data.occurrence === konz.occurrences.itemsLoadedFromStorage) {
           Utils.clog(false, 'magenta', '', 'View/update/items loaded:', payload);
           Utils.clog(false, 'magenta', '', 'View/update/calling addLoadedItems()');
           this.addLoadedItems(data.payload);
@@ -35,12 +35,15 @@ export class View
           break;
         }
       }
-        if (this.data.occurrence === konz.occurrences.removal) {
-          Utils.clog(false, 'magenta', '', 'View/removal:', payload.getDomElem());
-          this.data.payload[0].getDomElem().remove();
+      case konz.names.list: {
+        if (this.data.occurrence === konz.occurrences.removal.clicked) {
+          Utils.clog(false, 'magenta', '', 'View/removal:', payload[0]);
+          // this.data.payload[0].getDomElem().remove();
+          document.getElementById(data.payload[0]).remove();
           this.notify(data);
           break;
         }
+      }
 
     }
   }
@@ -56,16 +59,18 @@ export class View
       // konz.elems.list.append(List.createItemElem(item));
     });
     let new_item = new ItemFactory({
-                                       edition: {value: 'Indo longe...'},
-                                       completion: {},
-                                       removal: {},
-                                     }).build();
+                                     edition   : {value: 'Indo longe...'},
+                                     completion: {},
+                                     removal   : {},
+                                   }).build();
+    new_item.addObserver(this.list);
     konz.elems.list.append(new_item.getDomElem());
     new_item = new ItemFactory({
-                                       edition: {value: 'Indo ainda mais longe...'},
-                                       completion: {},
-                                       removal: {},
-                                     }).build();
+                                 edition   : {value: 'Indo ainda mais longe...'},
+                                 completion: {},
+                                 removal   : {},
+                               }).build();
+    new_item.addObserver(this.list);
     konz.elems.list.append(new_item.getDomElem());
     // konz.elems.list.querySelectorAll('.text').forEach(text => {
     //   text.addEventListener( 'click', e => {

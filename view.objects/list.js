@@ -13,20 +13,21 @@ export class List
   }
 
   update(data) {
+    this.data.occurrence = data.occurrence;
     switch (data.origin) {
       case konz.names.add: {
-        this.data.occurrence = data.occurrence;
-        this.data.payload    = data.payload;
+        this.data.payload = data.payload;
         this.notify(this.data);
         break;
       }
       case konz.names.item:
-        if (this.data.occurrence === konz.occurrences.removal) {
+        if (this.data.occurrence === konz.occurrences.removal.clicked) {
           Utils.clog('lightblue', null, 'List/removal/data:');
           Utils.clog(true, null, null, data);
-          Utils.clog('lightblue', null, 'List/adding observable Item');
-          data.payload[0].addObserver(this);
-          this.notify(data);
+          // Utils.clog('lightblue', null, 'List/adding observable Item');
+          // data.payload[0].addObserver(this);
+          this.data.payload = data.payload;
+          this.notify(this.data);
           break;
         }
     }
