@@ -8,6 +8,10 @@ export class Add
     extends Observable {
   constructor() {
     super(konz.names.add);
+    konz.elems.add.addEventListener('click', e => {
+      this.data.s
+      this.notify(this.data);
+    })
   }
 
   // update(data) {

@@ -9,6 +9,9 @@ export const konz = {
     removal: {
       clicked: 'removal-clicked'
     },
+    add: {
+      clicked: 'add-clicked'
+    }
   },
   names      : {
     init      : 'Init',
@@ -23,6 +26,7 @@ export const konz = {
   },
   elems      : {
     list: document.getElementById('list-div'),
+    add: document.getElementById('add-div')
   },
   symbols    : {
     done  : '\u2714',
