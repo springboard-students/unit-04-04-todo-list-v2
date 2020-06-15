@@ -56,7 +56,11 @@ class EditionFactory {
   build() {
     const texta = document.createElement('textarea');
     texta.classList.add('text');
-    texta.value = this.props.value;
+    if (!!this.props.value) {
+      texta.value = this.props.value;
+    } else {
+      texta.placeholder="Describe your item...";
+    }
     return new Edition(texta);
   }
 

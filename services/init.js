@@ -16,7 +16,7 @@ class Init
     Utils.clog(false, 'yellow', '', 'Init/creating view objects');
     this.storage = new Storage();
     this.list    = new List();
-    this.view    = new View(this.list); // his is a workaround to make the list to observe item
+    this.view    = new View(this.list); // This is a workaround to make the list to observe item
     this.add     = new Add();
     //
     this.init();

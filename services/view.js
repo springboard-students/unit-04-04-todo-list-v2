@@ -16,36 +16,54 @@ export class View
   update(data) {
     const origin         = data.origin;
     this.data.occurrence = data.occurrence;
-    const payload        = data.payload;
+    // const payload        = data.payload;
     switch (origin) {
       case konz.names.init: {
-        Utils.clog(false, 'magenta', '', 'View/update/Occurrence from init:', this.data.occurrence);
+        Utils.clog(false, 'magenta', '', 'View/update/Occurrence from init:', this.data.jnb());
         break;
       }
       case konz.names.storage: {
-        Utils.clog(false, 'magenta', '', 'View/update/Occurrence from storage:', this.data.occurrence);
+        Utils.clog(false, 'magenta', '', 'View/update/Occurrence from storage:', this.data.jnb());
         if (this.data.occurrence === konz.occurrences.itemsLoadedFromStorage) {
-          Utils.clog(false, 'magenta', '', 'View/update/items loaded:', payload);
+          Utils.clog(false, 'magenta', '', 'View/update/items loaded:', data.payload);
           Utils.clog(false, 'magenta', '', 'View/update/calling addLoadedItems()');
           this.addLoadedItems(data.payload);
           // Utils.clog(false, 'magenta', '', 'View/update/notifying observers');
           // this.data.occurrence = occurrence;
           // this.data.payload    = payload;
           // this.notify(this.data);
-          break;
         }
+        break;
       }
       case konz.names.list: {
         if (this.data.occurrence === konz.occurrences.removal.clicked) {
-          Utils.clog(false, 'magenta', '', 'View/removal:', payload[0]);
-          // this.data.payload[0].getDomElem().remove();
+          Utils.clog(false, 'magenta', '', 'View/removal:', data.jnb());
           document.getElementById(data.payload[0]).remove();
           this.notify(data);
-          break;
+        } else if (this.data.occurrence === konz.occurrences.add.clicked){
+          Utils.clog(false, 'magenta', '', 'View/add:', data.jnb());
+          Utils.clog(false, 'magenta', '', 'View/adding new Item');
+          // document.getElementById(data.payload[0]).remove();
+          this.addNew();
+          this.notify(data);
         }
+        break;
+      }
+      default: {
+
       }
 
     }
+  }
+
+  addNew() {
+    let new_item = new ItemFactory({
+                                     edition   : {},
+                                     completion: {},
+                                     removal   : {},
+                                   }).build();
+    new_item.addObserver(this.list);
+    konz.elems.list.append(new_item.getDomElem());
   }
 
   addLoadedItems(data) {
@@ -58,20 +76,14 @@ export class View
       // Utils.clog(false, 'magenta', '', 'View/addLoadedItems/adding item', name);
       // konz.elems.list.append(List.createItemElem(item));
     });
-    let new_item = new ItemFactory({
-                                     edition   : {value: 'Indo longe...'},
-                                     completion: {},
-                                     removal   : {},
-                                   }).build();
-    new_item.addObserver(this.list);
-    konz.elems.list.append(new_item.getDomElem());
-    new_item = new ItemFactory({
-                                 edition   : {value: 'Indo ainda mais longe...'},
-                                 completion: {},
-                                 removal   : {},
-                               }).build();
-    new_item.addObserver(this.list);
-    konz.elems.list.append(new_item.getDomElem());
+
+    // let new_item = new ItemFactory({
+    //                              edition   : {value: 'Indo ainda mais longe...'},
+    //                              completion: {},
+    //                              removal   : {},
+    //                            }).build();
+    // new_item.addObserver(this.list);
+    // konz.elems.list.append(new_item.getDomElem());
     // konz.elems.list.querySelectorAll('.text').forEach(text => {
     //   text.addEventListener( 'click', e => {
     //     console.log( e.target );

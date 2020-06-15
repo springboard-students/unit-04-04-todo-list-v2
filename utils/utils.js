@@ -14,7 +14,7 @@ export class Utils {
     let msg = '';
     args.forEach(arg => msg += arg + ' ');
     console.log('%c ' + String(new Date().getTime()) + ' » ' + msg,
-                'background: ' + back + '; color: ' + fore);
+                'background: ' + back + '; color: ' + fore );
     // Utils.sleep(1000);
   }
 

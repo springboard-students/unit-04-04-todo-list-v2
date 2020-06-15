@@ -28,7 +28,7 @@ export class Observable {
         Utils.clog(false, 'orange', '', observer.data.origin, 'Observer being notified by', this.data.origin, 'using' +
                                                                                                  ' this' +
                                                                                                  ' data:');
-        Utils.clog(true, null, null, data);
+        Utils.clog(true, null, null, data.jnb());
         observer.update(data);
       });
     }

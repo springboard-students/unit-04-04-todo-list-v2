@@ -30,6 +30,7 @@ export class Edition
     text.classList.add('text');
     // text.setAttribute('disabled', 'true');
     text.value = value;
+    text.placeholder='Describe your item...';
     // textContainer.append(text);
     // textContainer.classList.add('bordered');
     // textContainer.addEventListener( 'click', e => {

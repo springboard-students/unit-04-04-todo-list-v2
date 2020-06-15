@@ -9,7 +9,7 @@ export class Add
   constructor() {
     super(konz.names.add);
     konz.elems.add.addEventListener('click', e => {
-      this.data.s
+    this.data.occurrence = konz.occurrences.add.clicked;
       this.notify(this.data);
     })
   }
