@@ -48,6 +48,10 @@ body {
   /*margin: 20px;*/
 }
 
+#add-div:hover {
+  box-shadow : 3px 3px 3px #555;
+}
+
 #list-div {
   /*margin-top: 50px;*/
   /*border: 1px solid red;*/
